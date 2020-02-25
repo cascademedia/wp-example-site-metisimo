@@ -2,4 +2,6 @@ path: web/wp
 require:
     - wp-cli.php
 server:
-  docroot: web
+    docroot: web
+apache_modules:
+    - mod_rewrite

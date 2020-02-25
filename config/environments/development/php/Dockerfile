@@ -19,4 +19,5 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
     && sed -ri -e 's!Listen 80!Listen ${APACHE_HTTP_PORT}!g' /etc/apache2/ports.conf \
     && sed -ri -e 's!Listen 443!Listen ${APACHE_HTTPS_PORT}!g' /etc/apache2/ports.conf \
     && sed -ri -e 's!:80!:${APACHE_HTTP_PORT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!:443!:${APACHE_HTTPS_PORT}!g' /etc/apache2/sites-available/*.conf
+    && sed -ri -e 's!:443!:${APACHE_HTTPS_PORT}!g' /etc/apache2/sites-available/*.conf \
+    && a2enmod rewrite
