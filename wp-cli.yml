@@ -1,0 +1,5 @@
+path: web/wp
+require:
+    - wp-cli.php
+server:
+  docroot: web

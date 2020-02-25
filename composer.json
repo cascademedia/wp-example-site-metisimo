@@ -1,0 +1,116 @@
+{
+    "name": "cascademedia/wp-example-site-metisimo",
+    "type": "project",
+    "license": "proprietary",
+    "description": "Example WordPress site Metisimo",
+    "homepage": "http://cascademedia.us/",
+    "authors": [
+        {
+            "name": "Estel Smith",
+            "email": "estel@cascademedia.us",
+            "homepage": "https://github.com/estelsmith",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "7.4.3",
+            "ext-mysqli": "1"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-paths": {
+            "web/app/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "web/app/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/app/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        },
+        "wordpress-install-dir": "web/wp"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-mysqli": "*",
+        "aaemnnosttv/wp-cli-dotenv-command": "~2.0.0",
+        "composer/installers": "~1.7.0",
+        "oscarotero/env": "~1.2.0",
+        "roots/wordpress": "~5.3.0",
+        "roots/wp-config": "~1.0.0",
+        "roots/wp-password-bcrypt": "~1.0.0",
+        "vlucas/phpdotenv": "~4.1.0",
+        "wp-cli/wp-cli-bundle": "~2.4.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "~3.5.0",
+        "symfony/var-dumper": "~5.0.0"
+    },
+    "scripts": {
+        "clean": [
+            "rm -rf web/wp",
+            "rm -rf web/.htaccess",
+            "rm -rf bin",
+            "rm -rf vendor",
+            "rm -rf .env"
+        ],
+        "dev:bootstrap": [
+            "Composer\\Config::disableProcessTimeout",
+            "wp dev wait-for-database --command='dev bootstrap'"
+        ],
+        "dev:destroy": [
+            "@dev:down --volumes"
+        ],
+        "dev:down": [
+            "docker-compose down --remove-orphans"
+        ],
+        "dev:logs": [
+            "Composer\\Config::disableProcessTimeout",
+            "docker-compose logs --follow"
+        ],
+        "dev:shell": [
+            "Composer\\Config::disableProcessTimeout",
+            "docker-compose exec web /bin/bash < /dev/tty"
+        ],
+        "dev:status": [
+            "docker-compose ps"
+        ],
+        "dev:up": [
+            "Composer\\Config::disableProcessTimeout",
+            "docker-compose up --build --remove-orphans --detach",
+            "@dev:bootstrap"
+        ],
+        "post-install-cmd": [
+            "Composer\\Config::disableProcessTimeout",
+            "if [ ! -f .env ]; then cp .env.example .env; fi"
+        ],
+        "setup": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer install",
+            "@dev:up"
+        ],
+        "test": [
+            "phpcs"
+        ]
+    }
+}

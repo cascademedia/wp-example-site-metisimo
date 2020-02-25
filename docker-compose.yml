@@ -1,0 +1,47 @@
+version: "3.7"
+
+x-vars:
+    db:
+        database: &db_database "wordpress"
+        password: &db_password "test123"
+        user: &db_user "wpuser"
+        dsn: &db_dsn "mysql://wpuser:test123@database/wordpress"
+
+services:
+    database:
+        image: mariadb:10.5.1
+        environment:
+            MYSQL_DATABASE: *db_database
+            MYSQL_USER: *db_user
+            MYSQL_PASSWORD: *db_password
+            MYSQL_RANDOM_ROOT_PASSWORD: "true"
+        ports:
+            - 3306:3306
+        volumes:
+            - database:/var/lib/mysql
+
+    web:
+        build:
+            context: config/environments/development/php
+            dockerfile: Dockerfile
+        environment:
+            APACHE_DOCUMENT_ROOT: /var/www/html/web
+            DATABASE_URL: *db_dsn
+        ports:
+            - 8081:80
+        volumes:
+            - .:/var/www/html
+
+    mail:
+        environment:
+            MH_API_BIND_ADDR: 0.0.0.0:8083
+            MH_SMTP_BIND_ADDR: 0.0.0.0:8025
+            MH_STORAGE: memory
+            MH_UI_BIND_ADDR: 0.0.0.0:8083
+        image: mailhog/mailhog:latest
+        ports:
+            - 8025:8025
+            - 8083:8083
+
+volumes:
+    database:
