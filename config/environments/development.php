@@ -17,3 +17,6 @@ Config::define('WP_DISABLE_FATAL_ERROR_HANDLER', true);
 Config::define('SCRIPT_DEBUG', true);
 
 ini_set('display_errors', '1');
+
+//@todo
+//Config::define('WP_DEFAULT_THEME', 'generatepress');

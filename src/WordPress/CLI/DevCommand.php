@@ -169,7 +169,7 @@ class DevCommand extends \WP_CLI_Command
     public function bootstrapLate(): void
     {
         $commands = [
-            'theme activate twentytwenty',
+//            'theme activate generatepress',
             'rewrite structure /%postname%/ --hard' # Set Permalink settings to "Post name" default
         ];
 
