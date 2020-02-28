@@ -1,5 +1,5 @@
 # Metisimo
-An example WordPress site to showcase how Cascade Media builds sites.
+An example WordPress site to showcase how I build sites.
 
 ## Prerequisites
 Before starting, make sure the following software is installed.

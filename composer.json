@@ -1,14 +1,14 @@
 {
-    "name": "cascademedia/wp-example-site-metisimo",
+    "name": "estelsmith/wp-example-site-metisimo",
     "type": "project",
     "license": "proprietary",
     "description": "Example WordPress site Metisimo",
-    "homepage": "http://cascademedia.us/",
+    "homepage": "https://github.com/estelsmith/wp-example-site-metisimo",
     "authors": [
         {
             "name": "Estel Smith",
-            "email": "estel@cascademedia.us",
-            "homepage": "https://github.com/estelsmith",
+            "email": "estel.smith@gmail.com",
+            "homepage": "https://estelsmith.com/",
             "role": "Developer"
         }
     ],
